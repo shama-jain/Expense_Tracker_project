@@ -102,10 +102,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const res = await fetch(apiUrl);
     allExpenses = await res.json();
 
-    // Sort all expenses by date ascending
     allExpenses.sort((a, b) => new Date(a.date) - new Date(b.date));
 
-    // Extract and sort unique months
     const months = new Set();
     allExpenses.forEach((exp) => {
       if (exp.date) months.add(exp.date.slice(0, 7));
@@ -122,18 +120,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function filterAndRender() {
     if (!currentMonth) {
-      // No filter = show everything
       filteredExpenses = [...allExpenses];
-      renderExpenses(false); // No page number
+      renderExpenses(false);
       return;
     }
 
-    // Filter by selected month
     filteredExpenses = allExpenses.filter(
       (exp) => exp.date && exp.date.startsWith(currentMonth)
     );
 
-    renderExpenses(true); // Show page number
+    renderExpenses(true);
   }
 
   function renderExpenses(showPage) {
@@ -169,7 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const pageIndex = monthList.indexOf(currentMonth) + 1;
       currentPageEl.textContent = `Page ${pageIndex}`;
     } else {
-      currentPageEl.textContent = ""; // Hide if no filter
+      currentPageEl.textContent = "";
     }
 
     updateSummary(filteredExpenses);
