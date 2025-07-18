@@ -3,19 +3,14 @@ const cors = require("cors");
 const path = require("path");
 const app = express();
 
-// 👇 Use the Render-provided port
 const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(express.json());
-
-// 👇 Serve static files (frontend) from the current folder
 app.use(express.static(__dirname));
 
-// In-memory expense storage
 let expenses = [];
 
-// 👇 API routes
 app.get("/api/expenses", (req, res) => {
   res.json(expenses);
 });
@@ -43,12 +38,10 @@ app.delete("/api/expenses/:id", (req, res) => {
   res.status(204).send();
 });
 
-// 👇 Fallback route: send index.html for `/`
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "index.html"));
 });
 
-// 👇 Start the server
 app.listen(PORT, () => {
-  console.log(`✅ Server running on http://localhost:${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
