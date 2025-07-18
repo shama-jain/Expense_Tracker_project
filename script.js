@@ -9,7 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const currentPageEl = document.getElementById("currentPage");
   const prevPageBtn = document.getElementById("prevPage");
   const nextPageBtn = document.getElementById("nextPage");
-  const apiUrl = "http://localhost:3000/api/expenses";
+
+  const apiUrl = "/api/expenses";
 
   let allExpenses = [];
   let filteredExpenses = [];
